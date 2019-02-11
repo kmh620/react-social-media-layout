@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-function Post({image, username, content}){
+function Post({image, username, content, handle}){
   const feedGrid = {
     display: 'grid',
     gridTemplateColumns: '1fr 3fr',
@@ -10,7 +10,33 @@ function Post({image, username, content}){
 
   const imageStyle = {
     margin: '15',
-    width: '75'
+    width: '75',
+    borderRadius: '50%',
+    borderStyle: 'solid',
+    borderColor: 'rgba(255, 255, 255, .2)'
+  }
+
+  const lineColor = {
+    borderColor: '#303030'
+  }
+
+  const usernameStyle = {
+    fontSize: '22',
+    marginBottom: '0',
+    fontWeight: 'bold',
+  }
+
+  const handleStyle = {
+    fontWeight: 'lighter',
+    fontSize: '16',
+    marginBottom: '5',
+    color: 'gray',
+    marginBottom: '0'
+  }
+
+  const paragraphStyle = {
+    fontWeight: 'lighter',
+    marginTop: '6'
   }
 
   return (
@@ -18,11 +44,11 @@ function Post({image, username, content}){
       <div style={feedGrid}>
         <img src={image} style={imageStyle}></img>
         <div>
-          <h2>{username}</h2>
-          <p>{content}</p>
+          <h2 style={usernameStyle}>{username} <span style={handleStyle}>{handle}</span></h2>
+          <p style={paragraphStyle}>{content}</p>
         </div>
       </div>
-      <hr/>
+      <hr style ={lineColor}/>
     </div>
   )
 }
@@ -30,7 +56,8 @@ function Post({image, username, content}){
 Post.propTypes = {
   image: PropTypes.string,
   username: PropTypes.string,
-  content: PropTypes.string
+  content: PropTypes.string,
+  handle: PropTypes.string
 };
 
 export default Post;

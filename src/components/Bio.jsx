@@ -2,9 +2,17 @@ import React from 'react';
 
 function Bio(){
   const styledBio = {
-    borderStyle: 'solid',
+    backgroundColor: '#303030',
     padding: '20',
-    textAlign: 'left'
+    textAlign: 'left',
+    margin: '30',
+    color: 'white',
+    fontFamily: 'helvetica',
+    borderStyle: 'solid',
+    borderColor: 'rgba(255, 255, 255, .02)',
+    borderRadius: '3px',
+    fontWeight: 'lighter'
+
   }
 
   return (
