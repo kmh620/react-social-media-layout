@@ -1,6 +1,7 @@
 import React from 'react';
 
 function AddPost(){
+  //start style stuff
   const inputStyle = {
     padding: '10',
     color: 'gray',
@@ -10,11 +11,9 @@ function AddPost(){
     width: '200',
     marginBottom: '10'
   }
-
   const lineColor = {
     borderColor: '#303030'
   }
-
   const buttonStyle = {
     padding: '10',
     fontFamily: 'helvetica',
@@ -25,11 +24,25 @@ function AddPost(){
     width: '75px',
     borderRadius: '5'
   }
+//end style stuff
+//start state stuff
+let _tweet = null;
+
+function handleNewPostFormSubmission(event) {
+  event.preventDefault();
+  console.log(_tweet.value)
+}
+//end state stuff
+
   return (
     <div>
-      <form>
-        <input style={inputStyle} value="What's happening?"></input>
-        <button style={buttonStyle}>Tweet</button>
+      <form onSubmit={handleNewPostFormSubmission}>
+        <input
+          type="text"
+          id='tweet'
+          placeholder="What's happening?"
+          ref={(input) => {_tweet = input;}}/>
+        <button type='submit' style={buttonStyle}>Tweet</button>
         <hr style= {lineColor}/>
       </form>
     </div>
