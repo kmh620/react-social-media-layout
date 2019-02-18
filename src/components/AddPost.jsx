@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function AddPost(){
+function AddPost(props){
   //start style stuff
   const inputStyle = {
     padding: '10',
@@ -26,11 +27,18 @@ function AddPost(){
   }
 //end style stuff
 //start state stuff
-let _tweet = null;
+let content = null;
 
 function handleNewPostFormSubmission(event) {
   event.preventDefault();
-  console.log(_tweet.value)
+  console.log(content.value);
+  props.onNewPostCreation({
+    image: "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png",
+    content: content.value,
+    username: 'mastermind4',
+    handle: '@mastermind4'
+  })
+  content.value = "what's Happening?";
 }
 //end state stuff
 
@@ -41,12 +49,15 @@ function handleNewPostFormSubmission(event) {
           type="text"
           id='tweet'
           placeholder="What's happening?"
-          ref={(input) => {_tweet = input;}}/>
+          ref={(input) => {content = input;}}/>
         <button type='submit' style={buttonStyle}>Tweet</button>
         <hr style= {lineColor}/>
       </form>
     </div>
   )
+  AddPost.propTypes = {
+    onNewPostCreation: PropTypes.func
+  }
 }
 
 export default AddPost;

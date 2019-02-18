@@ -7,9 +7,17 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false
+      masterPosts: []
     };
+    this.handleAddingNewPost = this.handleAddingNewPost.bind(this);
   }
+
+  handleAddingNewPost(newPost) {
+    let newMasterPosts = this.state.masterPosts.slice();
+    newMasterPosts.push(newPost);
+    this.setState({masterPosts: newMasterPosts});
+  }
+
   render() {
     const feedStyle = {
       backgroundColor: '#303030',
@@ -24,8 +32,8 @@ class Feed extends React.Component {
     }
     return (
       <div style={feedStyle}>
-        <AddPost/>
-        <RecentPosts/>
+        <AddPost onNewPostCreation={this.handleAddingNewPost}/>
+        <RecentPosts postList = {this.state.masterPosts}/>
       </div>
     )
   }
