@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 
 function Post(props) {
-  console.log(props);
+  let detailValue = false;
   const feedGrid = {
     display: 'grid',
     gridTemplateColumns: '1fr 3fr',
@@ -39,8 +39,21 @@ function Post(props) {
     marginTop: '6'
   };
 
+  function toggleDetails() {
+    console.log(detailValue)
+    if (detailValue === false) {
+      detailValue = true;
+    } else {
+      detailValue = false;
+    }
+  }
+
+  function getDetails(id) {
+    props.onGetDetails(id);
+  }
 
   return (
+
     <div>
       <div style={feedGrid}>
         <img src={props.image} style={imageStyle}></img>
@@ -49,6 +62,11 @@ function Post(props) {
           <p style={paragraphStyle}>{props.content}</p>
         </div>
         <p>Likes: {props.likes}</p>
+        <button onClick={()=> toggleDetails()}>show details</button>
+          {detailValue ?
+            <p>"hello"</p>:
+              null
+          }
       </div>
 
     </div>
@@ -62,7 +80,9 @@ Post.propTypes = {
   content: PropTypes.string,
   handle: PropTypes.string,
   likes: PropTypes.number,
-  id: PropTypes.string
+  id: PropTypes.string,
+  details: PropTypes.bool,
+  onGetDetails: PropTypes.func
 };
 
 export default Post;

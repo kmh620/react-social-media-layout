@@ -7,10 +7,13 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterPosts: []
+      masterPosts: [],
+      details: false
     };
     this.handleAddingNewPost = this.handleAddingNewPost.bind(this);
     this.handleLikePost = this.handleLikePost.bind(this);
+    this.handleDisLikedPost = this.handleDisLikedPost.bind(this);
+    this.handlePostDetails = this.handlePostDetails.bind(this);
   }
 
   handleAddingNewPost(newPost) {
@@ -30,6 +33,28 @@ class Feed extends React.Component {
     })
     this.setState({masterPosts: posts});
   }
+  handleDisLikedPost(id){
+    let posts = this.state.masterPosts.slice();
+    posts.forEach(function(post){
+      if (id === post.id) {
+
+        post.likes -= 1
+        console.log(id)
+      }
+    })
+    this.setState({masterPosts: posts});
+  }
+  handlePostDetails(id){
+    let posts = this.state.masterPosts.slice();
+    let username = null;
+    posts.forEach(function(post){
+      if (id === post.id) {
+        console.log(post.username)
+        username = post.username
+      }
+    })
+    return username;
+  }
   render() {
     const feedStyle = {
       backgroundColor: '#303030',
@@ -47,7 +72,11 @@ class Feed extends React.Component {
         <AddPost
           onNewPostCreation={this.handleAddingNewPost}
           />
-        <RecentPosts likePost={this.handleLikePost} postList = {this.state.masterPosts}/>
+        <RecentPosts
+          disLikePost={this.handleDisLikedPost} likePost={this.handleLikePost}
+          postList = {this.state.masterPosts}
+          showPostDetails = {this.handlePostDetails}
+          />
       </div>
     )
   }
