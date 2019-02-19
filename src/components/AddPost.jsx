@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 
 function AddPost(props){
   //start style stuff
@@ -31,12 +32,13 @@ let content = null;
 
 function handleNewPostFormSubmission(event) {
   event.preventDefault();
-  console.log(content.value);
   props.onNewPostCreation({
     image: "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png",
     content: content.value,
     username: 'mastermind4',
-    handle: '@mastermind4'
+    handle: '@mastermind4',
+    likes: 0,
+    id: v4()
   })
   content.value = "what's Happening?";
 }
